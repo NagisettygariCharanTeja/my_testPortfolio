@@ -24,7 +24,11 @@ const AppContainer = styled.div<{ isHovered: boolean }>`
   background-size: 400% 400%;
   animation: ${gradientAnimation} 15s ease infinite;
   transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 2rem;
+  padding: 2rem 1rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -35,6 +39,12 @@ const ContentWrapper = styled.div`
   gap: 1.5rem;
   position: relative;
   padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
 `;
 
 const ProjectList = styled.div`
@@ -42,6 +52,11 @@ const ProjectList = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   padding-top: 12rem;
+
+  @media (max-width: 768px) {
+    padding-top: 6rem;
+    gap: 1rem;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -51,6 +66,10 @@ const ProjectCard = styled(motion.div)`
   cursor: pointer;
   padding: 0.25rem;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 `;
 
 const ProjectTitle = styled.h2`
@@ -78,6 +97,10 @@ const ProjectYear = styled.span`
 const InfoSection = styled.div`
   padding-top: 12rem;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding-top: 2rem;
+  }
 `;
 
 const Name = styled.h1`
@@ -86,9 +109,16 @@ const Name = styled.h1`
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: normal;
+  word-wrap: break-word;
 
   ${InfoSection}:has(+ .phone-preview) & {
     opacity: 0.2;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin-bottom: 0.25rem;
   }
 `;
 
@@ -100,10 +130,12 @@ const Role = styled.p`
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  transition: opacity 0.5s ease;
+  white-space: normal;
+  word-wrap: break-word;
 
-  ${InfoSection}:has(+ .phone-preview) & {
-    opacity: 0.2;
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -148,6 +180,17 @@ const PhonePreview = styled(motion.div)`
   overflow: hidden;
   padding: 0;
   z-index: 10;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 350px;
+    height: 80vh;
+    max-height: 700px;
+  }
 `;
 
 const StatusBar = styled.div`
@@ -306,6 +349,10 @@ const PreviewContent = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
 `;
 
 const MessageBubble = styled.div`
@@ -316,6 +363,12 @@ const MessageBubble = styled.div`
   max-width: 80%;
   font-size: 0.9rem;
   color: #000;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const ReceivedMessage = styled(MessageBubble)`
@@ -340,6 +393,11 @@ const ImageMessage = styled.img`
   width: 80%;
   border-radius: 15px;
   margin: 0.5rem 0;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 0.25rem 0;
+  }
 `;
 
 function App() {
@@ -424,6 +482,9 @@ function App() {
                 damping: 25,
                 mass: 0.5,
                 duration: 0.6
+              }}
+              style={{
+                transform: window.innerWidth <= 768 ? 'translate(-50%, -50%)' : 'none'
               }}
             >
               <StatusBar>
